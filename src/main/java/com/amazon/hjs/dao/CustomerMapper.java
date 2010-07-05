@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  *
  */
@@ -18,6 +20,9 @@ public interface CustomerMapper {
     @Insert("insert into customer (email, name, phone) values (#{email}, #{name}, #{phone})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertCustomer(Customer customer);
+
+    @Select("select * from customer")
+    List<Customer> selectAllCustomers();
 }
 
 /*

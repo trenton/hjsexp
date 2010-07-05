@@ -13,6 +13,7 @@ import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.MatchResult;
 
@@ -29,10 +30,17 @@ public class TheHarness {
             System.out.printf("by id: %s\n", mapper.selectCustomer(1));
             System.out.printf("by email: %s\n", mapper.selectCustomerByEmail("trentonl@amazon.com"));
 
+/*
             System.out.printf("enter a new customer: email  name  phone: ");
             String[] values = parseLine();
-
             mapper.insertCustomer(new Customer(values[0], values[1], values[2]));
+*/
+
+            System.out.println("\nall customers: ");
+            for (Customer customer : mapper.selectAllCustomers()) {
+                System.out.printf("%3d: %s <%s>\n", customer.getId(), customer.getName(), customer.getEmail());
+            }
+
         } finally {
             session.commit();
             session.close();
